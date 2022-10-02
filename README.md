@@ -5,7 +5,7 @@
 # Current features 📝
 - Downloading .mp4 files videos from Youtube ✔
 - Converting .mp4  to .mp3 files ✔
-- 
+
 # Setup ⚙️
 1. Download [here](https://github.com/MariuszM-PL/Youtube-MP3-and-MP4-Downloader/releases/download/youtube/Youtube.MP3.and.MP4.Downloader.zip)
 2. Unzip archive
