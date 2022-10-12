@@ -138,6 +138,153 @@ namespace Youtube_MP3_and_MP4_Downloader
                         MessageBox.Show("Error with downloading .mp4. Try again !");
                     }
                 }
+                else if (checkedListBox1.SelectedItem.ToString() == "FLAC")
+                {
+                    progressBar1.Value = 0;
+
+                    string outputFolder = tbFolderPath.Text;
+                    string url = $@"{tbUrl.Text}";
+
+
+                    var youTube = YouTube.Default; // starting point for YouTube actions
+
+                    lblStatus.Text = "Downloading...";
+                    Cursor.Current = Cursors.WaitCursor;
+                    var video = youTube.GetVideo(url); // gets a Video object with info about the video
+                    File.WriteAllBytes(outputFolder + @"\" + video.FullName, video.GetBytes());
+                    progressBar1.Value = 100;
+                    lblPercent.Text = "100%";
+                    lblStatus.Text = "Finished!";
+
+                    string downloadedMp4Path = @$"{outputFolder}\{video.FullName}";
+                    FileInfo mp4 = new FileInfo(downloadedMp4Path);
+
+                    if (File.Exists(downloadedMp4Path) && mp4.Length > 0)
+                    {
+                        Cursor.Current = Cursors.Default;
+                        var currentPathConverter = Path.GetDirectoryName(Application.ExecutablePath);
+                        var inputFile = $@"{outputFolder}\{video.FullName}";
+
+                        String nameFile = video.FullName;
+                        var changeExtensionFile = nameFile.Replace(".mp4", "");
+                        var outputFile = $@"{outputFolder}\{changeExtensionFile}.flac";
+                        var mp3out = "";
+
+                        lblStatus.Text = "Converting to .flac...";
+                        lblPercent.Text = "0%";
+                        progressBar1.Value = 0;
+                        Cursor.Current = Cursors.WaitCursor;
+                        var ffmpegProcess = new Process();
+                        ffmpegProcess.StartInfo.UseShellExecute = false;
+                        ffmpegProcess.StartInfo.RedirectStandardInput = true;
+                        ffmpegProcess.StartInfo.RedirectStandardOutput = true;
+                        ffmpegProcess.StartInfo.RedirectStandardError = true;
+                        ffmpegProcess.StartInfo.CreateNoWindow = true;
+                        ffmpegProcess.StartInfo.FileName = currentPathConverter + @"\FFmpeg.exe";
+                        ffmpegProcess.StartInfo.Arguments = " -i " + "\"" + inputFile + "\"" + " -vn -acodec flac -bits_per_raw_sample 16 -ar 44100 " + "\"" + outputFile + "\"";
+                        ffmpegProcess.Start();
+                        ffmpegProcess.StandardOutput.ReadToEnd();
+                        mp3out = ffmpegProcess.StandardError.ReadToEnd();
+                        ffmpegProcess.WaitForExit();
+                        if (!ffmpegProcess.HasExited)
+                        {
+                            ffmpegProcess.Kill();
+                        }
+
+                        if (File.Exists(outputFile))
+                        {
+                            FileInfo mp3 = new FileInfo(outputFile);
+                            if (mp3.Length > 0)
+                            {
+                                progressBar1.Value = 100;
+                                lblPercent.Text = "100%";
+                                lblStatus.Text = "Done !";
+                                MessageBox.Show("Converting to .flac is done !");
+                                Cursor.Current = Cursors.Default;
+                                File.Delete(downloadedMp4Path);
+                                Process.Start("explorer.exe", @$"/select, {outputFile}");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error with converting to .flac. Try again !");
+                            }
+                        }
+                    }
+                }
+                else if (checkedListBox1.SelectedItem.ToString() == "WAV")
+                {
+                    progressBar1.Value = 0;
+
+                    string outputFolder = tbFolderPath.Text;
+                    string url = $@"{tbUrl.Text}";
+
+
+                    var youTube = YouTube.Default; // starting point for YouTube actions
+
+                    lblStatus.Text = "Downloading...";
+                    Cursor.Current = Cursors.WaitCursor;
+                    var video = youTube.GetVideo(url); // gets a Video object with info about the video
+                    File.WriteAllBytes(outputFolder + @"\" + video.FullName, video.GetBytes());
+                    progressBar1.Value = 100;
+                    lblPercent.Text = "100%";
+                    lblStatus.Text = "Finished!";
+
+                    string downloadedMp4Path = @$"{outputFolder}\{video.FullName}";
+                    FileInfo mp4 = new FileInfo(downloadedMp4Path);
+
+                    if (File.Exists(downloadedMp4Path) && mp4.Length > 0)
+                    {
+                        Cursor.Current = Cursors.Default;
+                        var currentPathConverter = Path.GetDirectoryName(Application.ExecutablePath);
+                        var inputFile = $@"{outputFolder}\{video.FullName}";
+
+                        String nameFile = video.FullName;
+                        var changeExtensionFile = nameFile.Replace(".mp4", "");
+                        var outputFile = $@"{outputFolder}\{changeExtensionFile}.wav";
+                        var mp3out = "";
+
+                        lblStatus.Text = "Converting to .wav...";
+                        lblPercent.Text = "0%";
+                        progressBar1.Value = 0;
+                        Cursor.Current = Cursors.WaitCursor;
+                        var ffmpegProcess = new Process();
+                        ffmpegProcess.StartInfo.UseShellExecute = false;
+                        ffmpegProcess.StartInfo.RedirectStandardInput = true;
+                        ffmpegProcess.StartInfo.RedirectStandardOutput = true;
+                        ffmpegProcess.StartInfo.RedirectStandardError = true;
+                        ffmpegProcess.StartInfo.CreateNoWindow = true;
+                        ffmpegProcess.StartInfo.FileName = currentPathConverter + @"\FFmpeg.exe";
+                        
+                        ffmpegProcess.StartInfo.Arguments = " -i " + "\"" + inputFile + "\"" + " -vn -acodec pcm_s16le -ar 44100 -ac 2 " + "\"" + outputFile + "\"";
+                        ffmpegProcess.Start();
+                        ffmpegProcess.StandardOutput.ReadToEnd();
+                        mp3out = ffmpegProcess.StandardError.ReadToEnd();
+                        ffmpegProcess.WaitForExit();
+                        if (!ffmpegProcess.HasExited)
+                        {
+                            ffmpegProcess.Kill();
+                        }
+
+                        if (File.Exists(outputFile))
+                        {
+                            FileInfo mp3 = new FileInfo(outputFile);
+                            if (mp3.Length > 0)
+                            {
+                                progressBar1.Value = 100;
+                                lblPercent.Text = "100%";
+                                lblStatus.Text = "Done !";
+                                MessageBox.Show("Converting to .wav is done !");
+                                Cursor.Current = Cursors.Default;
+                                File.Delete(downloadedMp4Path);
+                                Process.Start("explorer.exe", @$"/select, {outputFile}");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error with converting to .wav. Try again !");
+                            }
+                        }
+                    }
+                }
             }
         }
 

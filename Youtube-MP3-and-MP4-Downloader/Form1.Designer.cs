@@ -130,7 +130,9 @@
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
             "MP3",
-            "MP4"});
+            "MP4",
+            "WAV",
+            "FLAC"});
             this.checkedListBox1.Location = new System.Drawing.Point(352, 169);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 40);
@@ -206,7 +208,7 @@
             this.lblPercent.AutoSize = true;
             this.lblPercent.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblPercent.ForeColor = System.Drawing.Color.White;
-            this.lblPercent.Location = new System.Drawing.Point(324, 202);
+            this.lblPercent.Location = new System.Drawing.Point(315, 202);
             this.lblPercent.Name = "lblPercent";
             this.lblPercent.Size = new System.Drawing.Size(21, 14);
             this.lblPercent.TabIndex = 12;
