@@ -12,11 +12,11 @@ Option to convert downloaded MP4 files to other audio formats (MP3, FLAC, WAV).
 Visual progress bar and status updates during download and conversion processes.
 Responsive design with mouse hover effects on buttons for better user experience.
 
-## Requirements 📙
+## Requirements ⚙️
 .NET Framework
 FFmpeg executable (FFmpeg.exe) in the same directory as the application executable.
 
-## Usage ⚙️
+## Usage 🖱️
 Run the application (Youtube_MP3_and_MP4_Downloader.exe).
 Enter the YouTube video URL.
 Click the "Browse" button to choose the output folder.
@@ -29,7 +29,7 @@ Once the process is complete, the application will display the status and open t
 Make sure to have the FFmpeg executable (FFmpeg.exe) in the same directory as the application executable. FFmpeg is required for the conversion process.
 This application utilizes the VideoLibrary library for interacting with YouTube videos.
 
-## Acknowledgments
+## Acknowledgments 📜
 VideoLibrary: https://github.com/youtube/api-samples/tree/master/dotnet/Google.Apis.YouTube.Samples
 
 ## Author
